@@ -38,7 +38,6 @@
 
 <script>
 import request from '@/utils/request.js'; // 导入 request.js
-
 export default {
   data() {
     return {
