@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/examples/examples",
+    "pages/me/me"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "简历优化小助手",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/icon/home.png",
+        "selectedIconPath": "/static/icon/home-active.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/examples/examples",
+        "iconPath": "/static/icon/examples.png",
+        "selectedIconPath": "/static/icon/examples-active.png",
+        "text": "模板"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "/static/icon/me.png",
+        "selectedIconPath": "/static/icon/me-active.png",
+        "text": "我"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
