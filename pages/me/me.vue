@@ -44,6 +44,7 @@ export default {
       userInfo: null, // 用户信息
       hasUserInfo: false, // 是否已获取用户信息
       defaultAvatar: require('@/static/icon/avatar.png'), // 默认头像路径
+			token: null
     };
   },
   onLoad() {
@@ -92,12 +93,17 @@ export default {
         console.log('用户昵称:', wxUserInfo.nickName);
         console.log('用户详细信息:', wxUserInfo);
 
-        // 3. 将用户信息和 code 发送到后端
         const response = await request.post('/user/login', {
           code,
           userInfo: wxUserInfo,
         });
-		console.log('response:', response);
+        if (response.data && response.data.token) {
+          uni.setStorageSync('token', response.data.token); 
+          console.log('Token已存储');
+        } else {
+          console.error('Token未找到于响应中');
+        }
+        
         if (response.code === '200') {
           // 登录成功，保存用户信息
           this.userInfo = wxUserInfo;

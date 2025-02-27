@@ -9480,9 +9480,9 @@ internalMixin(Vue);
 
 /***/ }),
 /* 26 */
-/*!*******************************************!*\
-  !*** D:/weixinapp/ResumeBoost/pages.json ***!
-  \*******************************************/
+/*!************************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/pages.json ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9626,9 +9626,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 33 */
-/*!*********************************************************!*\
-  !*** D:/weixinapp/ResumeBoost/uni.promisify.adaptor.js ***!
-  \*********************************************************/
+/*!**************************************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/uni.promisify.adaptor.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9650,9 +9650,9 @@ uni.addInterceptor({
 
 /***/ }),
 /* 34 */
-/*!******************************************************!*\
-  !*** D:/weixinapp/ResumeBoost/static/css/global.css ***!
-  \******************************************************/
+/*!***********************************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/static/css/global.css ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9662,9 +9662,9 @@ uni.addInterceptor({
 
 /***/ }),
 /* 35 */
-/*!*************************************************!*\
-  !*** D:/weixinapp/ResumeBoost/utils/request.js ***!
-  \*************************************************/
+/*!******************************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/utils/request.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9743,9 +9743,9 @@ exports.default = _default;
 
 /***/ }),
 /* 36 */
-/*!******************************************!*\
-  !*** D:/weixinapp/ResumeBoost/config.js ***!
-  \******************************************/
+/*!***********************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/config.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9774,21 +9774,7 @@ exports.default = _default;
 /* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */
+/* 43 */
 /*!************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
   \************************************************************************************************/
@@ -9797,11 +9783,11 @@ exports.default = _default;
 
 // TODO(Babel 8): Remove this file.
 
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 58)();
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 44)();
 module.exports = runtime;
 
 /***/ }),
-/* 58 */
+/* 44 */
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -10122,7 +10108,7 @@ function _regeneratorRuntime() {
 module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 59 */
+/* 45 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -10162,10 +10148,24 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
 /* 60 */
-/*!*******************************************************!*\
-  !*** D:/weixinapp/ResumeBoost/static/icon/avatar.png ***!
-  \*******************************************************/
+/*!************************************************************************************!*\
+  !*** D:/weixinapp/ResumeBoost/resume-optimization-frontend/static/icon/avatar.png ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
