@@ -1,0 +1,5 @@
+# 忽略配置文件
+manifest.json
+
+#忽略API配置文件
+config.js

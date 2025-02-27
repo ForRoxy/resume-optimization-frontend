@@ -9762,7 +9762,8 @@ var apiConfig = {
   },
   prod: {
     baseUrl: 'https://119.84.246.218:57534'
-  }
+  },
+  fileUrl: 'https://119.84.246.218:57534/resume/uploadResume'
 };
 var _default = apiConfig;
 exports.default = _default;

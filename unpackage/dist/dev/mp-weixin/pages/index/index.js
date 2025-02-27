@@ -145,6 +145,7 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 43));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 45));
 var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 35));
+var _config = _interopRequireDefault(__webpack_require__(/*! @/config.js */ 36));
 //
 //
 //
@@ -286,7 +287,7 @@ var _default = {
     uploadFile: function uploadFile(file) {
       return new Promise(function (resolve, reject) {
         uni.uploadFile({
-          url: 'https://119.84.246.218:57534/resume/uploadResume',
+          url: _config.default.fileUrl,
           filePath: file.path,
           name: 'file',
           header: {

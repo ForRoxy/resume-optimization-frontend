@@ -40,7 +40,7 @@
 
 <script>
 import request from '@/utils/request.js'
-
+import apiConfig from "@/config.js"
 export default {
   data() {
     return {
@@ -110,7 +110,7 @@ export default {
 	uploadFile(file) {
 		return new Promise((resolve, reject) => {
 			uni.uploadFile({
-				url: 'https://119.84.246.218:57534/resume/uploadResume',
+				url: apiConfig.fileUrl,
 				filePath: file.path,
 				name: 'file',
 				header: {
