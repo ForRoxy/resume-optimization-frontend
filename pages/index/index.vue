@@ -29,7 +29,7 @@
           <text class="grid-text">我的收藏</text>
         </view>
         
-        <view class="grid-item">
+        <view class="grid-item" @click="handleMyResume">
           <image class="grid-icon" src="/static/icon/label.png"></image>
           <text class="grid-text">我的简历</text>
         </view>
@@ -44,131 +44,129 @@ import request from '@/utils/request.js'
 export default {
   data() {
     return {
-      title: '欢迎使用'
+      title: '欢迎使用',
+      resumeList: []  // 用来保存简历列表
     }
   },
   methods: {
-    // 上传简历处理
-    async handleUploadResume() {
+	// 上传简历处理
+	async handleUploadResume() {
+		try {
+			// 1. 检查登录状态
+			const token = uni.getStorageSync('token');
+			if (!token) {
+				uni.showToast({ title: '请先登录', icon: 'none' });
+				return uni.switchTab({ url: '/pages/me/me' });
+			}
+
+			// 2. 选择文件
+			const res = await uni.chooseMessageFile({
+				count: 1,
+				type: 'file',
+				extension: ['.pdf', '.doc', '.docx']  // 限制文件类型为 .pdf, .doc, .docx
+			});
+
+			// 3. 获取文件信息
+			const file = res.tempFiles[0];
+
+			// 4. 如果文件类型不匹配，提示用户
+			const fileExtension = this.getFileExtension(file.name);
+			if (!['pdf', 'doc', 'docx'].includes(fileExtension.toLowerCase())) {
+				uni.showToast({
+					title: '请选择PDF或Word文件',
+					icon: 'none'
+				});
+				return;
+			}
+
+			// 5. 执行上传
+			const uploadRes = await this.uploadFile(file);
+			
+			// 6. 处理上传结果
+			if (uploadRes.code === '200') {
+				uni.showToast({ title: '上传成功' });
+			} else {
+				throw new Error(uploadRes.msg || '上传失败');
+			}
+		} catch (error) {
+			console.error('上传失败:', error);
+			uni.showToast({
+				title: error.message || '上传失败',
+				icon: 'none'
+			});
+		}
+	},
+
+	// 获取文件扩展名
+	getFileExtension(fileName) {
+		const index = fileName.lastIndexOf('.');
+		if (index === -1) {
+			return ''; // 无扩展名的文件
+		}
+		return fileName.substring(index + 1);
+	},
+
+	// 封装上传文件方法
+	uploadFile(file) {
+		return new Promise((resolve, reject) => {
+			uni.uploadFile({
+				url: 'https://119.84.246.218:57534/resume/uploadResume',
+				filePath: file.path,
+				name: 'file',
+				header: {
+					'Content-Type': 'multipart/form-data',
+					'token': uni.getStorageSync('token')
+				},
+				formData: {
+					fileName: file.name,  // 只传递文件名
+				},
+				success: (res) => {
+					try {
+						const data = JSON.parse(res.data);
+						resolve(data);
+					} catch (e) {
+						reject(new Error('响应解析失败'));
+					}
+				},
+				fail: (err) => {
+					reject(new Error('网络请求失败'));
+				}
+			});
+		});
+	},
+
+    // 点击“我的简历”时获取简历列表
+    async handleMyResume() {
       try {
-        // 1. 检查登录状态
         const token = uni.getStorageSync('token')
         if (!token) {
           uni.showToast({ title: '请先登录', icon: 'none' })
           return uni.switchTab({ url: '/pages/me/me' })
         }
 
-        // 2. 选择文件
-        const res = await uni.chooseMessageFile({
-          count: 1,
-          type: 'file',
-          extension: ['.pdf', '.doc', '.docx']
+        // 发送请求获取简历列表
+        const response = await request.get('/myResume', {
+          token: token  // 传递 token
         })
 
-        // 3. 获取文件信息
-        const file = res.tempFiles[0]
-
-        // 4. 执行上传
-        const uploadRes = await this.uploadFile(file)
-        
-        // 5. 处理上传结果
-        if (uploadRes.code === 200) {
-          uni.showToast({ title: '上传成功' })
-          // 这里可以添加成功后的业务逻辑
+        if (response.code === '200') {
+          this.resumeList = response.data // 假设返回的数据是一个简历列表
+          uni.navigateTo({
+            url: '/pages/resume-list/resume-list?resumeList=' + JSON.stringify(this.resumeList) // 将简历数据传递到新页面
+          })
         } else {
-          throw new Error(uploadRes.msg || '上传失败')
+          throw new Error(response.msg || '获取简历列表失败')
         }
       } catch (error) {
-        console.error('上传失败:', error)
+        console.error('获取简历列表失败:', error)
         uni.showToast({ 
-          title: error.message || '上传失败',
+          title: error.message || '获取简历列表失败',
           icon: 'none'
         })
       }
-    },
-
-    // 封装上传方法
-    uploadFile(file) {
-      return new Promise((resolve, reject) => {
-        uni.uploadFile({
-          url: 'https://119.84.246.218:57534/resume/uploadResume',
-          filePath: file.path,
-          name: 'file',
-          header: {
-            'Content-Type': 'multipart/form-data',
-            'token': uni.getStorageSync('token')
-          },
-          formData: {
-            fileName: file.name,
-            fileType: file.type
-          },
-          success: (res) => {
-            try {
-              const data = JSON.parse(res.data)
-              resolve(data)
-            } catch (e) {
-              reject(new Error('响应解析失败'))
-            }
-          },
-          fail: (err) => {
-            reject(new Error('网络请求失败'))
-          }
-        })
-      })
     }
   }
 }
 </script>
 
-<style>
-.container {
-  background-color: #f8f8f8;
-  min-height: 100vh;
-}
-
-/* 横幅图样式 */
-.banner {
-  width: 100%;
-  height: 300rpx;
-  display: block;
-  margin-bottom: 40rpx;
-}
-
-/* 四宫格容器 */
-.grid-container {
-  background-color: #ffffff;
-  border-radius: 20rpx;
-  margin: 0 30rpx;
-  padding: 30rpx 0;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
-}
-
-/* 行样式 */
-.grid-row {
-  display: flex;
-  justify-content: space-around;
-  margin: 40rpx 0;
-}
-
-/* 单个功能项 */
-.grid-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 300rpx;
-}
-
-/* 图标样式 */
-.grid-icon {
-  width: 100rpx;
-  height: 100rpx;
-  margin-bottom: 20rpx;
-}
-
-/* 文字样式 */
-.grid-text {
-  font-size: 28rpx;
-  color: #333;
-  font-weight: 500;
-}
-</style>
+<style src="./index.css"></style>
